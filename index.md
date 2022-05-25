@@ -1,37 +1,36 @@
-## Welcome to GitHub Pages
+# 9 Men’s Morris 
+(Summer vacation edition)
 
-You can use the [editor on GitHub](https://github.com/Legedith/9-men-s-morris/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+## Part 0: Installation
+* ### Simple Installation 
+1.  Go to [Releases](https://github.com/Legedith/9-men-s-morris/releases)
+2.  Find the latest release
+3.  Download and follow instructions
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+* ### Building from source
+1.  Clone the repo  
+              `git clone https://github.com/Legedith/9-men-s-morris.git`
+2.  cd into the cloned repo  
+              `cd 9-men-s-morris`
+3.  Compile using Javac  
+              `javac morris.java`
+4.  Run the compiled game  
+              `java morris`
 
-### Markdown
+## Part 1: Analysis of the game 🕵️‍♀️
+9 Men’s Morris is a classical 2 person game. 
+The game starts with each player having three pieces each. 
+The game consists of two phases; the placement phase and the movement phase. It’s won when either player manages to get three pieces in a row.
+In the placement phase, the players take turns placing their pieces on the board. Once they run out of pieces, the placement phase begins. 
+In the placement phase, the players can pick their pieces and place them at any blank location. 
+The one who gets three in a row first wins. 
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-```markdown
-Syntax highlighted code block
+## Part 2: Design 🎨
+For the Design of classes, we thought it wise to split the implementation into two classes. One depicting the game board containing all necessary variables to control and represent the game state, and the other to manage players and implement the rules and peculiarities of the game using the methods and variables of the game board. 
+The inspiration for this came from the fact that even in real life, you can play multiple games on the same game board by modifying the rules, the pieces and such. 
 
-# Header 1
-## Header 2
-### Header 3
+_P.s. you can even play a variation of tic-tac-toe on the same game board._
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Legedith/9-men-s-morris/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## Part 3: Description of classes 🔧🔨
