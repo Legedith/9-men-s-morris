@@ -37,7 +37,7 @@ _P.s. you can even play a variation of tic-tac-toe on the same game board._
 ## _Class gameBoard_   
 **Description of class**   
 A class to implement the raw game board. You can create any game and rules using the methods of this game board.    
-Variables:   
+### Variables:   
 board - a 2D array of integers that represents the game board   
 turn - an integer that represents whose turn it is  
 winner - an integer that represents the winner of the game  
