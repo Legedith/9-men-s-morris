@@ -34,3 +34,86 @@ _P.s. you can even play a variation of tic-tac-toe on the same game board._
 
 
 ## Part 3: Description of classes 🔧🔨
+### Class gameBoard
+Description of class
+A class to implement the raw game board. You can create any game and rules using the methods of this game board. 
+Variables: 
+board - a 2D array of integers that represents the game board
+turn - an integer that represents whose turn it is
+winner - an integer that represents the winner of the game
+placed - an integer that represents the number of pieces placed on the board
+
+Methods:
+Function placePiece
+Description of function
+Places a piece on the board
+Parameters:
+x - an integer that represents the x coordinate of the piece to be placed
+y - an integer that represents the y coordinate of the piece to be placed
+Returns:
+1 if the move is successful, 0 if not
+
+#### Function checkWin
+Description of function
+Checks if any player has 3 in a row, column, or diagonal
+Board will have 1 for player 1, 2 for player 2, and 0 for empty
+Returns 1 if player 1 wins, 2 if player 2 wins, 0 if no one wins
+
+Function move
+Description of function
+Moves a piece from one space to another
+Parameters:
+fromRow - an integer that represents the row of the piece to be moved
+fromCol - an integer that represents the column of the piece to be moved
+toRow - an integer that represents the row to move the piece to
+toCol - an integer that represents the column to move the piece to
+Returns:
+1 if the move is successful, 0 if not
+
+Function getTurn
+Description of function
+Returns the current turn
+
+Function setTurn
+Description of function
+Sets the current turn
+Parameters:
+turn - an integer that represents the turn to be set
+
+Function getPossibleMoves
+Description of function
+Returns an array of possible moves
+
+Function getWinner
+Description of function
+Returns the winner of the game
+
+Function isEmpty
+Description of function
+Checks if the position on the board is empty
+Parameters:  
+row - an integer that represents the row of the position to be checked
+col - an integer that represents the column of the position to be checked
+Returns:
+true if the position is empty, false if not
+
+Function printBoard
+Description of function
+Prints the board with stars for empty spaces dashes for lines
+Parameters:
+None
+Returns:
+None
+
+Function getPlaced
+Description of function
+Returns the number of pieces placed on the board
+
+Function decrementPlaced
+Description of function
+Decrements the number of pieces placed on the board
+Parameters:
+None
+Returns:
+None
+
