@@ -44,7 +44,7 @@ winner - an integer that represents the winner of the game
 placed - an integer that represents the number of pieces placed on the board  
 
 ### **Methods**:  
-Function **placePiece**  
+## Function **placePiece**  
 _Description of function_  
 Places a piece on the board  
 Parameters:  
@@ -53,14 +53,14 @@ y - an integer that represents the y coordinate of the piece to be placed
 Returns:  
 1 if the move is successful, 0 if not  
 
-Function **checkWin**  
+## Function **checkWin**  
 _Description of function_  
 Checks if any player has 3 in a row, column, or diagonal  
 Board will have 1 for player 1, 2 for player 2, and 0 for empty  
 Parameters: None  
 Returns: 1 if player 1 wins, 2 if player 2 wins, 0 if no one wins  
 
-Function **move**  
+## Function **move**  
 _Description of function_  
 Moves a piece from one space to another  
 Parameters:  
@@ -71,27 +71,27 @@ toCol - an integer that represents the column to move the piece to
 Returns:  
 1 if the move is successful, 0 if not  
  
-Function **getTurn**  
+## Function **getTurn**  
 _Description of function_  
 Returns the current turn  
   
-Function **setTurn**  
+## Function **setTurn**  
 _Description of function_  
 Sets the current turn  
 Parameters:  
  turn - an integer that represents the turn to be set   
  Return: None
 
-Function **getPossibleMoves**  
+## Function **getPossibleMoves**  
 _Description of function_  
 Parameters: None
  Returns an array of possible moves  
  
-Function **getWinner**  
+## Function **getWinner**  
 _Description of function_  
 Returns the winner of the game  
   
-Function **isEmpty**  
+## Function **isEmpty**  
 _Description of function_  
 Checks if the position on the board is empty  
 Parameters:    
@@ -100,7 +100,7 @@ col - an integer that represents the column of the position to be checked
 Returns:  
 true if the position is empty, false if not  
   
-Function **printBoard**  
+## Function **printBoard**  
 _Description of function_  
 Prints the board with stars for empty spaces dashes for lines  
 Parameters:  
@@ -108,11 +108,11 @@ None
 Returns:  
 None  
 
-Function **getPlaced**  
+## Function **getPlaced**  
 _Description of function_    
 Returns the number of pieces placed on the board  
   
-Function **decrementPlaced**  
+## Function **decrementPlaced**  
 _Description of function_  
 Decrements the number of pieces placed on the board  
 Parameters:  
