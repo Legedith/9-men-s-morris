@@ -43,8 +43,8 @@ turn - an integer that represents whose turn it is
 winner - an integer that represents the winner of the game  
 placed - an integer that represents the number of pieces placed on the board  
 
-Methods:  
-Function placePiece  
+### **Methods**:  
+Function **placePiece**  
 Description of function  
 Places a piece on the board  
 Parameters:  
@@ -53,14 +53,14 @@ y - an integer that represents the y coordinate of the piece to be placed
 Returns:  
 1 if the move is successful, 0 if not  
 
-Function checkWin  
+Function **checkWin**  
 Description of function  
 Checks if any player has 3 in a row, column, or diagonal  
 Board will have 1 for player 1, 2 for player 2, and 0 for empty  
 Parameters: None  
 Returns: 1 if player 1 wins, 2 if player 2 wins, 0 if no one wins  
 
-Function move  
+Function **move**  
 Description of function  
 Moves a piece from one space to another  
 Parameters:  
@@ -71,27 +71,27 @@ toCol - an integer that represents the column to move the piece to
 Returns:  
 1 if the move is successful, 0 if not  
  
-Function getTurn  
+Function **getTurn**  
 Description of function  
 Returns the current turn  
   
-Function setTurn  
+Function **setTurn**  
 Description of function  
 Sets the current turn  
 Parameters:  
  turn - an integer that represents the turn to be set   
  Return: None
 
-Function getPossibleMoves  
+Function **getPossibleMoves**  
 Description of function  
 Parameters: None
  Returns an array of possible moves  
  
-Function getWinner  
+Function **getWinner**  
 Description of function  
 Returns the winner of the game  
   
-Function isEmpty  
+Function **isEmpty**  
 Description of function  
 Checks if the position on the board is empty  
 Parameters:    
@@ -100,7 +100,7 @@ col - an integer that represents the column of the position to be checked
 Returns:  
 true if the position is empty, false if not  
   
-Function printBoard  
+Function **printBoard**  
 Description of function  
 Prints the board with stars for empty spaces dashes for lines  
 Parameters:  
@@ -108,11 +108,11 @@ None
 Returns:  
 None  
 
-Function getPlaced  
+Function **getPlaced**  
 Description of function  
 Returns the number of pieces placed on the board  
   
-Function decrementPlaced  
+Function **decrementPlaced**  
 Description of function  
 Decrements the number of pieces placed on the board  
 Parameters:  
