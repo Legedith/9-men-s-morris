@@ -120,3 +120,12 @@ None
 Returns:  
 None  
 
+## _Class morris_
+Purpose: Implement three mens morris using the board
+Game starts with empty board
+The players have 3 pieces each
+They take turns placing their piece on the board
+After the pieces are placed, the players take turn moving pieces.
+The first player to get 3 in a row wins
+
+
