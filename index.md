@@ -38,39 +38,39 @@ _P.s. you can even play a variation of tic-tac-toe on the same game board._
 **Description of class**   
 A class to implement the raw game board. You can create any game and rules using the methods of this game board.    
 Variables:   
-`board - a 2D array of integers that represents the game board   
+board - a 2D array of integers that represents the game board   
 turn - an integer that represents whose turn it is  
 winner - an integer that represents the winner of the game  
 placed - an integer that represents the number of pieces placed on the board  
-`
+
 Methods:  
 Function placePiece  
 Description of function  
 Places a piece on the board  
-`Parameters:  
+Parameters:  
 x - an integer that represents the x coordinate of the piece to be placed  
 y - an integer that represents the y coordinate of the piece to be placed  
 Returns:  
 1 if the move is successful, 0 if not  
-`
+
 Function checkWin  
 Description of function  
 Checks if any player has 3 in a row, column, or diagonal  
 Board will have 1 for player 1, 2 for player 2, and 0 for empty  
-`Parameters: None  
+Parameters: None  
 Returns: 1 if player 1 wins, 2 if player 2 wins, 0 if no one wins  
-`
+
 Function move  
 Description of function  
 Moves a piece from one space to another  
-`Parameters:  
+Parameters:  
 fromRow - an integer that represents the row of the piece to be moved  
 fromCol - an integer that represents the column of the piece to be moved  
 toRow - an integer that represents the row to move the piece to  
 toCol - an integer that represents the column to move the piece to  
 Returns:  
 1 if the move is successful, 0 if not  
- ` 
+ 
 Function getTurn  
 Description of function  
 Returns the current turn  
@@ -78,15 +78,15 @@ Returns the current turn
 Function setTurn  
 Description of function  
 Sets the current turn  
-`Parameters:  
+Parameters:  
  turn - an integer that represents the turn to be set   
  Return: None
-` 
+
 Function getPossibleMoves  
 Description of function  
-`Parameters: None
+Parameters: None
  Returns an array of possible moves  
- ` 
+ 
 Function getWinner  
 Description of function  
 Returns the winner of the game  
