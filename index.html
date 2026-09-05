@@ -1,83 +1,54 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f4f1e9">
-  <meta name="description" content="Three pieces. Two players. A little friendly rivalry. Play Nani's Morris together on one screen or invite a friend online.">
-  <meta name="referrer" content="no-referrer">
-  <title>Nani's Morris · Summer vacation edition</title>
-  <link rel="stylesheet" href="./styles.css">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232d5e50'/%3E%3Ccircle cx='20' cy='20' r='8' fill='%23f4f1e9'/%3E%3Ccircle cx='32' cy='32' r='8' fill='%23f4f1e9'/%3E%3Ccircle cx='44' cy='44' r='8' fill='%23f4f1e9'/%3E%3C/svg%3E">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f4f1e9"><meta name="referrer" content="no-referrer">
+<meta name="description" content="Full Nine Men's Morris: nine pieces, 24 points, mills, captures and flying. Play with a friend on one device or online.">
+<title>Nine Men's Morris · Legedith Play</title>
+<link rel="stylesheet" href="./styles.css?v=2">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232d5e50'/%3E%3Cpath d='M12 12H52V52H12ZM22 22H42V42H22ZM32 12V22M12 32H22M42 32H52M32 42V52' fill='none' stroke='%23f4f1e9' stroke-width='3'/%3E%3C/svg%3E">
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="./" aria-label="Nani's Morris home"><span class="brand-mark" aria-hidden="true">m.</span> Legedith <span class="brand-divider">/</span> play</a>
-    <button class="text-button" id="rules-open">How to play <span aria-hidden="true">↗</span></button>
-  </header>
-  <main>
-    <section class="intro" aria-labelledby="title">
-      <div><p class="eyebrow"><span class="tiny-line"></span> THE SUMMER VACATION EDITION</p>
-      <h1 id="title">Nani’s <em>Morris.</em></h1>
-      <p class="lede">Three pieces. Two players. A little friendly rivalry.</p></div>
-      <p class="intro-note">The game I played with my nani.<br>Now, a board we can share from anywhere.</p>
-    </section>
-    <div class="game-layout">
-      <section class="play-area" aria-label="Game">
-        <div class="board-heading"><div><p class="eyebrow" id="round-label">ROUND 01</p><h2 id="status" aria-live="polite" aria-atomic="true">Amber, place a piece.</h2></div><span class="phase-badge" id="phase">01 / PLACE</span></div>
-        <p class="instruction" id="instruction">Choose any empty spot. You each have three pieces.</p>
-        <div class="board-frame">
-          <span class="board-corner top-left" aria-hidden="true"></span><span class="board-corner bottom-right" aria-hidden="true"></span>
-          <div class="board" id="board" role="group" aria-label="Morris board. Columns A to C, rows 1 to 3. Use arrow keys or Tab, then Enter or Space.">
-            <svg class="board-lines" viewBox="0 0 300 300" aria-hidden="true"><path d="M50 50H250V250H50ZM150 50V250M50 150H250M50 50L250 250M250 50L50 250"/></svg>
-            <button class="spot" data-cell="0" aria-label="A1, empty"><span class="piece"></span><span class="position">A1</span></button>
-            <button class="spot" data-cell="1" aria-label="B1, empty"><span class="piece"></span><span class="position">B1</span></button>
-            <button class="spot" data-cell="2" aria-label="C1, empty"><span class="piece"></span><span class="position">C1</span></button>
-            <button class="spot" data-cell="3" aria-label="A2, empty"><span class="piece"></span><span class="position">A2</span></button>
-            <button class="spot" data-cell="4" aria-label="B2, empty"><span class="piece"></span><span class="position">B2</span></button>
-            <button class="spot" data-cell="5" aria-label="C2, empty"><span class="piece"></span><span class="position">C2</span></button>
-            <button class="spot" data-cell="6" aria-label="A3, empty"><span class="piece"></span><span class="position">A3</span></button>
-            <button class="spot" data-cell="7" aria-label="B3, empty"><span class="piece"></span><span class="position">B3</span></button>
-            <button class="spot" data-cell="8" aria-label="C3, empty"><span class="piece"></span><span class="position">C3</span></button>
-          </div>
-        </div>
-        <div class="board-footer"><span id="last-move">A familiar game. A fresh start.</span><span>3 × 3 · FAMILY RULES</span></div>
-        <div id="result" class="result" hidden><div><p class="eyebrow">ROUND COMPLETE</p><h3 id="result-title"></h3><p id="result-detail"></p></div><button id="rematch" class="button primary">Play again</button></div>
-        <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
-      </section>
-      <aside class="sidebar" aria-label="Players and play modes">
-        <section class="panel together-panel">
-          <p class="eyebrow">PULL UP A CHAIR</p><h2>Better together.</h2>
-          <div class="mode-switch" role="group" aria-label="Play mode"><button id="local-mode" class="active" aria-pressed="true">Same device</button><button id="online-mode" aria-pressed="false">Play online</button></div>
-          <div id="local-info"><p class="panel-copy">One screen, two people. Take turns and pass the board.</p></div>
-          <div id="online-setup" hidden>
-            <p class="panel-copy">Two screens, one board. Create a room and send your friend the invite.</p>
-            <button id="host" class="button primary full">Create a room <span aria-hidden="true">↗</span></button>
-            <div class="or"><span>or join your friend</span></div>
-            <form id="join-form"><label for="join-code">Room code or invite link</label><div class="join-row"><input id="join-code" name="room" placeholder="A1B2-C3D4-E5F6" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="500" required><button class="button secondary" type="submit">Join</button></div></form>
-          </div>
-          <div id="room-panel" hidden>
-            <div class="connection"><span id="connection-dot" class="connection-dot"></span><p id="connection-status" role="status">Connecting…</p></div>
-            <label for="invite">YOUR ROOM · <span id="room-code"></span></label><div class="invite-row"><input id="invite" readonly aria-label="Invitation link"><button id="copy-invite" class="button secondary">Copy</button></div>
-            <p class="room-hint" id="seat-hint">Keep this tab open while you play.</p>
-            <div class="room-actions"><button id="reconnect" class="text-button">Reconnect</button><button id="leave" class="text-button danger">Leave room</button></div>
-          </div>
-          <p class="online-disclaimer" id="online-disclaimer" hidden>No account or camera needed. Online rooms use public connection services, not a GitHub game server. <button class="inline-button" id="privacy-open">Connection & privacy</button></p>
-        </section>
-        <section class="panel players-panel" aria-label="Players">
-          <div class="player-card active" id="player-1"><span class="player-icon amber" aria-hidden="true">×</span><div class="player-info"><h3>Amber <span id="you-1" class="you" hidden>YOU</span></h3><p id="player-detail-1">3 pieces to place</p></div><div class="reserve" id="reserve-1" aria-hidden="true"></div></div>
-          <div class="player-card" id="player-2"><span class="player-icon forest" aria-hidden="true">○</span><div class="player-info"><h3>Forest <span id="you-2" class="you" hidden>YOU</span></h3><p id="player-detail-2">3 pieces to place</p></div><div class="reserve" id="reserve-2" aria-hidden="true"></div></div>
-          <button class="text-button new-round" id="restart">Start over</button>
-        </section>
-        <section class="little-rules"><p class="eyebrow">A SMALL REFRESHER</p><div><span>01</span><p>Take turns placing your <strong>three pieces.</strong></p></div><div><span>02</span><p>Then move a piece to <strong>any empty spot.</strong></p></div><div><span>03</span><p>Make a row, column or diagonal of three. <strong>You win.</strong></p></div><p class="rule-note">Not the nine-piece version. These are our family’s summer-vacation rules.</p></section>
-      </aside>
-    </div>
-  </main>
-  <footer class="footer"><span>Made to be played, not just remembered.</span><a href="https://github.com/Legedith/9-men-s-morris" target="_blank" rel="noopener noreferrer">View the source ↗</a></footer>
-  <dialog id="rules-dialog" aria-labelledby="rules-title"><button class="dialog-close text-button" data-close aria-label="Close rules">Close ×</button><p class="eyebrow">SUMMER VACATION RULES</p><h2 id="rules-title">Simple to learn.<br>One more round?</h2><p>This is the three-piece game from the original repository, inspired by games with my nani. It is not standard Nine Men’s Morris.</p><h3>Place, then move.</h3><p>Amber starts. Alternate placing one piece on any empty spot. Each player has three. After all six are placed, select one of your pieces, then select any empty spot to move it there. You do not have to move along a line or to a neighboring spot.</p><h3>Three in a line wins.</h3><p>A row, column or diagonal wins immediately, including during placement. There are no captures. A round is a draw if the same board and player-to-move repeat three times, or after 200 movement turns. The starting player alternates each round.</p><h3>Two ways to play.</h3><p><strong>Same device:</strong> take turns on one screen. <strong>Online:</strong> create a room, copy the link and send it to your friend. The host is Amber; the guest is Forest. Both must press Play again for a rematch. A disconnected player can rejoin without resetting the board while the host tab stays open.</p><p class="muted">Keyboard: Tab or arrow keys to navigate, Enter or Space to play, Escape to deselect.</p></dialog>
-  <dialog id="privacy-dialog" aria-labelledby="privacy-title"><button class="dialog-close text-button" data-close aria-label="Close connection details">Close ×</button><p class="eyebrow">NO ACCOUNT. NO GAME SERVER TO RUN.</p><h2 id="privacy-title">How online play works.</h2><p>GitHub Pages serves this website. PeerJS’s public signaling service introduces the browsers; WebRTC carries the game messages. PeerJS 1.5.5 also configures public STUN/TURN services to help with network restrictions.</p><p>The connection library is downloaded from jsDelivr (or unpkg as a fallback) only when you create or join a room. These providers and connection services can see normal connection metadata such as your IP address. Your opponent may also learn your IP address through WebRTC. Only join people you trust.</p><p>No microphone, camera, login or analytics is used. Same-device progress is saved in your browser. A rejoin token is saved in your tab’s session storage. Room data stays in the host tab’s memory; closing or refreshing that tab ends the room.</p><p>Public services have no availability guarantee. Some school, corporate or mobile networks can still block connections. Try a different network if Reconnect does not help. Same-device play does not need the online services.</p><p>The host validates moves and both browsers replay the move history. This is a friendly game, not a cheat-proof competitive service. Invitations give access to the guest seat; share them privately.</p></dialog>
-  <dialog id="confirm-dialog" aria-labelledby="confirm-title"><h2 id="confirm-title">Start a fresh board?</h2><p id="confirm-copy">This clears the current round.</p><div class="confirm-actions"><button class="button secondary" data-close>Cancel</button><button class="button primary" id="confirm-yes">Continue</button></div></dialog>
-  <noscript><p class="noscript">JavaScript is needed to play this game. Please enable it and reload.</p></noscript>
-  <script type="module" src="./src/app.js"></script>
-</body>
-</html>
+<header class="topbar"><a class="brand" href="./"><span class="brand-mark" aria-hidden="true">m.</span> Legedith <span class="brand-divider">/</span> play</a><button class="text-button" id="rules-open">How to play ↗</button></header>
+<main>
+<section class="intro" aria-labelledby="title"><div><p class="eyebrow">THE FULL NINE-PIECE GAME</p><h1 id="title">Nine Men’s <em>Morris.</em></h1><p class="lede">Build a mill. Take a piece. Think a move ahead.</p></div><p class="intro-note">A proper board. A familiar rivalry.<br>Pull up a chair, wherever you are.</p></section>
+<div class="game-layout">
+<section class="play-area" aria-label="Game">
+<div class="board-heading"><div><p class="eyebrow" id="round-label">ROUND 01</p><h2 id="status" aria-live="polite" aria-atomic="true">Amber, place a piece.</h2></div><span class="phase-badge" id="phase">01 / PLACE</span></div>
+<p class="instruction" id="instruction">Place your nine pieces. A mill earns a capture, not a win.</p>
+<div class="board-frame"><div class="board" id="board" role="group" aria-label="Nine Men's Morris board: 24 points on three connected squares. Tab or arrow keys to navigate, Enter or Space to play.">
+<svg class="board-lines" viewBox="0 0 700 700" aria-hidden="true"><path d="M50 50H650V650H50ZM150 150H550V550H150ZM250 250H450V450H250ZM350 50V250M350 450V650M50 350H250M450 350H650"/></svg>
+<span class="board-center" aria-hidden="true">MORRIS<span>IX · IX</span></span>
+</div></div>
+<div class="board-footer"><span id="last-move">Nine pieces each. Make every mill count.</span><span>24 POINTS · 9 MEN</span></div>
+<div id="result" class="result" hidden><div><p class="eyebrow">ROUND COMPLETE</p><h3 id="result-title"></h3><p id="result-detail"></p></div><button id="rematch" class="button primary">Play again</button></div>
+<p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+</section>
+<aside class="sidebar" aria-label="Players and play modes">
+<section class="panel together-panel"><p class="eyebrow">PULL UP A CHAIR</p><h2>Better together.</h2>
+<div class="mode-switch" role="group" aria-label="Play mode"><button id="local-mode" class="active" aria-pressed="true">Same device</button><button id="online-mode" aria-pressed="false">Play online</button></div>
+<div id="local-info"><p class="panel-copy">One screen, two people. Take turns and pass the board.</p></div>
+<div id="online-setup" hidden><p class="panel-copy">Two screens, one board. Create a room and share the invite.</p><button id="host" class="button primary full">Create a room ↗</button><div class="or">or join your friend</div>
+<form id="join-form"><label for="join-code">Room code or invite link</label><div class="join-row"><input id="join-code" name="room" placeholder="A1B2-C3D4-E5F6" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="500" required><button class="button secondary" type="submit">Join</button></div></form></div>
+<div id="room-panel" hidden><div class="connection"><span id="connection-dot" class="connection-dot"></span><p id="connection-status" role="status">Connecting…</p></div><label for="invite">YOUR ROOM · <span id="room-code"></span></label><div class="invite-row"><input id="invite" readonly aria-label="Invitation link"><button id="copy-invite" class="button secondary">Copy</button></div><p class="room-hint" id="seat-hint"></p><div class="room-actions"><button id="reconnect" class="text-button">Reconnect</button><button id="leave" class="text-button danger">Leave room</button></div></div>
+<p class="online-disclaimer" id="online-disclaimer" hidden>No account or camera needed. Rooms use public connection services. <button class="inline-button" id="privacy-open">Connection & privacy</button></p>
+</section>
+<section class="panel players-panel" aria-label="Players">
+<div class="player-card active" id="player-1"><span class="player-icon amber" aria-hidden="true">×</span><div class="player-info"><h3>Amber <span id="you-1" class="you" hidden>YOU</span></h3><p id="player-detail-1">9 in hand · 0 on board</p><p id="captured-1">0 captured</p></div><div class="reserve amber-reserve" id="reserve-1" aria-hidden="true"></div></div>
+<div class="player-card" id="player-2"><span class="player-icon forest" aria-hidden="true">○</span><div class="player-info"><h3>Forest <span id="you-2" class="you" hidden>YOU</span></h3><p id="player-detail-2">9 in hand · 0 on board</p><p id="captured-2">0 captured</p></div><div class="reserve forest-reserve" id="reserve-2" aria-hidden="true"></div></div>
+<button class="text-button new-round" id="restart">Start over</button></section>
+<section class="little-rules"><p class="eyebrow">PLACE. SLIDE. FLY.</p><div><span>01</span><p>Place <strong>nine pieces each</strong> on the 24 points.</p></div><div><span>02</span><p>Make a mill of three to <strong>capture one piece.</strong></p></div><div><span>03</span><p>Slide along a line. With three left, <strong>fly anywhere.</strong></p></div><p class="rule-note">Win by leaving your opponent with two pieces, or no legal move. There are no diagonal connections.</p></section>
+</aside></div></main>
+<footer class="footer"><span>Full Nine Men’s Morris · Flying at three · v2</span><a href="https://github.com/Legedith/9-men-s-morris" target="_blank" rel="noopener noreferrer">View the source ↗</a></footer>
+<dialog id="rules-dialog" aria-labelledby="rules-title"><button class="dialog-close text-button" data-close aria-label="Close rules">Close ×</button><p class="eyebrow">FULL NINE MEN’S MORRIS</p><h2 id="rules-title">Nine pieces.<br>Every move matters.</h2>
+<p>Two players, nine pieces each, 24 points on three connected squares. Amber starts the first round; the starting player alternates on rematches.</p>
+<h3>1. Place all eighteen pieces.</h3><p>Take turns putting one piece from your hand on any empty point. Captures do not return pieces to your hand. Neither player moves existing pieces until all eighteen have been placed.</p>
+<h3>2. Form a mill, then capture.</h3><p>Three of your pieces along one of the board’s marked straight lines form a mill. Remove one opposing piece before your turn ends. A piece inside a mill is protected while any of that player’s pieces lie outside mills. If all their pieces are in mills, any may be taken.</p><p>Closing two mills with one action still earns one capture. You may open a mill and close it again on a later turn to earn another capture. Keeping an existing mill does not earn extra captures. A mill is not an immediate win.</p>
+<h3>3. Slide, then fly.</h3><p>After placement, move one piece along a connecting line to the next empty point. No jumping over pieces, diagonal moves, or crossing the empty center. When reduced to exactly three pieces, you may fly to any empty point. This edition enables that common rules variation for both players.</p>
+<h3>Win or draw.</h3><p>You win when your opponent has fewer than three pieces remaining, counting any unplaced pieces, or has no legal move after placement. Captures must be completed before checking the next turn.</p><p>This edition automatically draws after three repetitions of the same board and player-to-move, or 50 moves by each player without a capture. These explicit draw rules prevent endless rounds.</p>
+<h3>Play together.</h3><p>Use Same device for pass-and-play, or Play online to share an invitation. Both online players must agree to a rematch. Keep the host’s tab open; a guest can refresh and rejoin the same room, including during a pending capture.</p><p class="muted">Keyboard: Tab or arrow keys to navigate; Enter or Space to act; Escape to deselect. Piece symbols and text identify players as well as color.</p><p class="muted">Rules reference: <a href="https://www.mastersgames.com/rules/morris-rules.htm" target="_blank" rel="noopener noreferrer">Masters Traditional Games</a>. The original three-piece Java game is retained in the repository as historical source.</p></dialog>
+<dialog id="privacy-dialog" aria-labelledby="privacy-title"><button class="dialog-close text-button" data-close aria-label="Close connection details">Close ×</button><p class="eyebrow">NO ACCOUNT. NO CAMERA.</p><h2 id="privacy-title">How online play works.</h2><p>GitHub Pages serves this website. PeerJS’s public signaling service introduces the browsers; WebRTC carries the game messages. PeerJS 1.5.5 includes public STUN/TURN defaults to help with network restrictions.</p><p>The connection library is downloaded from jsDelivr, or unpkg as a fallback, only for online play. These services can see network metadata such as your IP address. Your opponent may also learn your IP address through WebRTC. Share invites privately and play with people you trust.</p><p>No analytics, login, microphone or camera. Local games use browser storage. A guest rejoin token uses tab session storage. Online room state stays in host memory: closing or refreshing the host tab ends the room. Older three-piece saves and rooms are kept separate from this edition.</p><p>Public services have no availability guarantee. Restrictive networks can still block a connection; try another network. Same-device play does not need these services.</p><p>The host validates all moves and captures; guests replay the history. This is friendly peer-hosted play, not a cheat-proof ranked service.</p></dialog>
+<dialog id="confirm-dialog" aria-labelledby="confirm-title"><h2 id="confirm-title">Start a fresh board?</h2><p id="confirm-copy"></p><div class="confirm-actions"><button class="button secondary" data-close>Cancel</button><button class="button primary" id="confirm-yes">Continue</button></div></dialog>
+<noscript><p class="noscript">Enable JavaScript to play Nine Men’s Morris.</p></noscript>
+<script type="module" src="./src/app.js?v=2"></script>
+</body></html>

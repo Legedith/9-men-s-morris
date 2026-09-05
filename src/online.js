@@ -1,5 +1,6 @@
-import { newMatch, readMatch, act } from './game.js';
-const APP = 'nanis-morris-v1';
+import { newMatch, readMatch, act } from './game.js?v=2';
+// A new namespace prevents clients using the old 3x3 rules from sharing a room.
+const APP = 'nine-mens-morris-v2';
 const validCode = s => /^[A-F0-9]{12}$/.test(s);
 const randomHex = size => Array.from(crypto.getRandomValues(new Uint8Array(size)), n => n.toString(16).padStart(2,'0')).join('').toUpperCase();
 export function roomCode(input) {
@@ -33,7 +34,7 @@ async function loadPeer() {
 export class OnlineRoom {
   constructor({onChange, onStatus}) {
     this.onChange = onChange; this.onStatus = onStatus; this.match = newMatch();
-    this.closed = false; this.connected = false; this.pending = false; this.generation = 0;
+    this.closed = false; this.connected = false; this.pending = false;
     this.attempts = 0; this.timers = new Set(); this.connections = new Set();
   }
   later(fn, ms) {
@@ -54,7 +55,7 @@ export class OnlineRoom {
     this.status('Opening a secure connection…'); this.change();
     const Peer = await loadPeer();
     if (this.closed) return;
-    // PeerJS 1.5.5 includes public STUN and TURN defaults. Do not replace those with STUN-only config.
+    // Preserve PeerJS 1.5.5's public STUN and TURN defaults.
     this.peer = new Peer(role === 'host' ? `${APP}-${this.code}` : undefined, {secure:true, debug:0});
     const opening = this.later(() => { if (!this.peer.open) this.status('The connection service did not respond. Leave the room and try again.', 'error'); }, 18000);
     this.peer.on('open', () => {
@@ -70,21 +71,20 @@ export class OnlineRoom {
     });
     this.peer.on('disconnected', () => {
       if (!this.connected) this.status('Reconnecting to the connection service…');
-      this.later(() => { if (!this.peer.destroyed && this.peer.disconnected) { try { this.peer.reconnect(); } catch { /* Retry through UI. */ } } }, 2500);
+      this.later(() => { if (!this.peer.destroyed && this.peer.disconnected) { try { this.peer.reconnect(); } catch {} } }, 2500);
     });
     this.peer.on('error', error => {
       if (this.closed) return;
       if (error.type === 'peer-unavailable' && this.role === 'guest') {
         this.status('Host not reachable yet. Keep their tab open; retrying…'); this.retrySoon();
       } else if (!this.connected) {
-        const detail = error.type === 'unavailable-id' ? 'This room address is already in use. Leave and create a new room.' :
-          'Could not connect. Check your internet, try another network, or leave and create a new room.';
-        this.status(detail, 'error'); this.change();
+        this.status(error.type === 'unavailable-id' ? 'This room address is already in use. Leave and create a new room.' :
+          'Could not connect. Check your internet, try another network, or leave and create a new room.', 'error'); this.change();
       }
     });
     this.pulse = setInterval(() => {
       if (this.closed || !this.conn?.open || !this.connected) return;
-      if (Date.now() - this.lastSeen > 25000) { this.conn.close(); this.lost(this.conn); return; }
+      if (Date.now() - this.lastSeen > 25000) { const c=this.conn; c.close(); this.lost(c); return; }
       this.send({type:'ping'});
     }, 5000);
   }
@@ -126,8 +126,7 @@ export class OnlineRoom {
       if (data?.app === APP && data.type === 'reject' && this.role === 'guest') {
         this.attempts = 8; this.status('This room is full. Ask your friend to create a new room.', 'error'); conn.close(); return;
       }
-      if (!admitted || conn !== this.conn) return;
-      this.receive(data);
+      if (admitted && conn === this.conn) this.receive(data);
     });
   }
   send(data) {
@@ -167,7 +166,6 @@ export class OnlineRoom {
   submit(action) {
     if (!this.connected || !this.conn?.open) throw new Error('Wait until both players are connected.');
     if (this.pending) throw new Error('Waiting for the host to confirm your move.');
-    // Validate locally too, but only the host commits the move.
     const next = act(this.match, this.seat, action);
     if (this.role === 'host') { this.match = next; this.sync(); this.change(); }
     else {
