@@ -1,81 +1,90 @@
-# Nani's Morris — summer vacation edition
+# Nine Men's Morris
 
-**[Play in your browser](https://legedith.github.io/9-men-s-morris/)**
+**[Play the full game](https://legedith.github.io/9-men-s-morris/)**
 
-The little three-piece game I played with my nani, revived as a two-player browser game. This is the family's **3×3, three-piece, free-movement variant**, not standard Nine Men's Morris. The original Java implementation remains in `main` alongside the browser version.
+Full Nine Men's Morris for two human players: **24 points, nine pieces per player, mills, captures, sliding and flying**. Play together on one screen or invite a friend online. This replaces the earlier three-piece browser game; the original Java files remain as historical source, not the implementation of these rules.
 
-## Play together
+## Rules implemented
 
-**Same device:** open the site and take turns. The local board is saved in your browser when storage is available.
+The board has three concentric squares, four midpoint connections, 24 points and 16 mills. There are no diagonal connections and no line across the empty center.
 
-**Online:** select **Play online → Create a room → Copy**. Send the invitation to your friend. They open it and press **Join**. A 12-character room code works too. The host plays Amber (×); the guest plays Forest (○). No account, install, camera or microphone is required.
+**Place:** alternate placing one piece from hand until each player has placed all nine. Captured pieces are permanently removed, not returned to hand. Movement starts only after all eighteen placements and any pending capture are complete.
 
-The host must keep the tab open. The board pauses when the connection drops; the guest can reconnect or refresh and rejoin from the same tab. Both players must request a rematch. Closing or refreshing the host tab ends the room. A guest seat is reserved for its original session, so a third person cannot take it during a disconnect.
+**Mill and capture:** close a marked straight line of three to remove one opposing piece. Complete that capture before your turn ends. Pieces inside mills are protected while any opposing piece lies outside a mill. If all opposing pieces are in mills, any may be captured. A mill is not an immediate victory. An existing, unchanged mill gives no extra capture; opening and later closing it earns another. Closing two mills at once earns one capture in this edition.
 
-## Rules
+**Slide:** after placement, move one piece to an adjacent empty point along a board line. No jumping over pieces or moving diagonally.
 
-1. Alternate placing one piece on an empty spot until each player has three.
-2. Then select one of your pieces and move it to **any** empty spot. Adjacency is not required. There are no captures.
-3. A row, column or diagonal of three wins immediately, even during placement.
+**Fly:** this edition enables the common flying variation: a player reduced to exactly three pieces may move to any empty point, but only after placement is complete.
 
-The starter alternates on rematches. Two explicit draw safeguards prevent endless games: the same board and player-to-move appearing three times, or 200 movement turns. These safeguards and immediate placement-win detection fix omissions in the old console version without changing its free-movement rule.
+**Win:** leave the opponent with fewer than three pieces remaining (including any still in hand), or with no legal movement after placement.
 
-Touch, mouse and keyboard are supported. Use Tab or arrow keys to choose a spot, Enter/Space to play, and Escape to deselect. Color is not the only piece identifier.
+**Draw conventions:** automatic threefold repetition of the same board and player-to-move, or 100 movement turns without a capture (50 moves each). The counter resets on a capture. These are explicit rules for this edition; traditional and tournament rulesets can differ.
 
-## What GitHub Pages does — and does not do
+Rules reference: [Masters Traditional Games](https://www.mastersgames.com/rules/morris-rules.htm). The in-game How to play dialog explains all conventions.
 
-The site is plain HTML, CSS and JavaScript; there is no build step or application backend. Online mode loads **PeerJS 1.5.5**, pinned on jsDelivr with an unpkg fallback. PeerServer Cloud supplies signaling. WebRTC carries game messages; this PeerJS release includes public STUN/TURN defaults. See [PeerJS's release source](https://github.com/peers/peerjs/blob/v1.5.5/lib/util.ts) and [connection documentation](https://peerjs.com/client/getting-started).
+## Two-player modes
 
-This is **not** a claim that GitHub hosts a multiplayer server, or that there are no external services. Public connection services have no uptime guarantee. Restrictive networks can still block connections; try another network. Same-device mode does not contact these services.
+**Same device:** take turns on one screen. The board, including a pending capture, is saved in browser storage when available.
 
-The host validates every action against the current round, revision and turn. The guest replays received move history instead of trusting an arbitrary board. Stale/duplicate actions are rejected. Connection loss never resets a live round, and one player cannot unilaterally restart an online round. This is a friendly peer-hosted game, not a cheat-proof ranked service.
+**Online:** choose **Play online → Create a room → Copy** and send the invite to your friend. They open it and press **Join**. A room code works too. The host is Amber (×), the guest Forest (○). No login, installation, microphone or camera.
 
-## Privacy
+The host keeps the room in memory and must keep the tab open. A disconnected guest can reconnect or refresh and rejoin from the same tab, including during a capture. Closing or refreshing the host tab ends the room. The original guest's seat is reserved against third-player takeover. Both players must agree to a rematch; the starting player alternates.
 
-No analytics, login, chat, camera or microphone. Local matches use `localStorage`; guest rejoin tokens use `sessionStorage`. Room state lives in host memory. The CDN, signaling and ICE providers see normal network metadata; WebRTC can reveal an IP address to the opponent. Share invitations privately and play with people you trust. Details are available in the app's Connection & privacy dialog.
+Use mouse, touch or keyboard. Tab/arrows navigate the points, Enter/Space acts, Escape deselects. Legal destinations and capture targets are highlighted. Symbols and text distinguish pieces as well as color.
 
-## Run locally
+## Upgrade from the old three-piece edition
+
+Both players should reload the site and create a **new room**. Version 2 has a new storage key, wire-protocol version and PeerJS room namespace, so old 3×3 saves or clients cannot silently become full-game matches. Old local data is not deleted. Versioned asset URLs avoid mixing the old and new rules files.
+
+## Hosting and privacy
+
+The site is static HTML, CSS and JavaScript on GitHub Pages. Online mode loads pinned **PeerJS 1.5.5** from jsDelivr with an unpkg fallback. PeerServer Cloud supplies signaling; WebRTC carries the game actions. That PeerJS release includes public STUN/TURN defaults. [PeerJS source](https://github.com/peers/peerjs/blob/v1.5.5/lib/util.ts).
+
+GitHub does not run a multiplayer application backend. Public connection services have no availability guarantee, and restrictive networks can block connections. Same-device mode does not depend on these services.
+
+The host validates each action against round, revision, turn, board adjacency, mill protection and capture phase. The guest legally replays the received action history, including separate capture actions. Duplicate or stale captures cannot remove a second piece. This is friendly peer-hosted play, not a cheat-proof ranked service.
+
+No analytics. Local matches use localStorage; guest rejoin tokens use sessionStorage. Online state stays in host memory. CDN/signaling/ICE providers see normal connection metadata, and WebRTC may reveal IP addresses to opponents. Share invitations privately and play with people you trust.
+
+## Develop and test
+
+All source development is on `main`. No application build or npm installation is required.
 
 ```sh
 python3 -m http.server 8000
 # Open http://localhost:8000
-```
-
-Use HTTP on localhost or HTTPS when deployed. Opening `index.html` as a file is not supported because browsers restrict ES module loading on file URLs.
-
-## Tests
-
-Node 22 or newer; no npm dependencies are needed for the rules/protocol tests:
-
-```sh
 npm test
 ```
 
-The suite covers all winning lines, placement/movement validation, stale packets, rematch consent, resignation, draw safeguards, hostile snapshots, room-code parsing, and invariants over 6,762 reachable positions.
+Use Node 22+ for tests. Serve the site over localhost HTTP or deployed HTTPS; opening index.html as a file is not supported by browser ES-module restrictions.
 
-Browser tests use Python/Playwright:
+The 34 rules/protocol tests include all sixteen mills for both players, adjacency, flying, protected captures, double mills, reopened mills, placement/capture transitions, material and blockade wins, draws, immutable state, hostile snapshots and rematch consent. Seeded simulation additionally completes 100 legal games and replays every action.
 
 ```sh
 pip install -r requirements-dev.txt
 python -m playwright install chromium
 python tests/browser_test.py
 python tests/browser_test.py --public
+# Optional deployed-site check:
+python tests/browser_test.py --public --url https://legedith.github.io/9-men-s-morris/
 ```
 
-The default browser suite uses **real WebRTC data channels between independent browser contexts** with a test-only signaling adapter, not fake game-state synchronization. `--public` uses the shipped PeerJS library and public services with no adapter. Both cover joining, seat limits, synchronized play, guest refresh, rematches, resignation, and disconnect handling. The isolated suite also forces a data-channel loss. Public-service tests do not guarantee connectivity on every ISP or firewall.
+The browser suite checks the full board and placement phase, capture UI, protected mills, flying, capture victory, saved pending captures, phone/desktop layouts, and online play between independent browser contexts. Online checks exercise captures by both seats, turn retention, seat limits, guest refresh during a pending capture, legal sliding, resignations, mutual rematches and disconnect handling. Advanced local fixtures are generated by legal play and validated replay, not by injecting an arbitrary board.
 
-## Publishing from main
+The default online tests use real WebRTC data channels with an isolated test signaling adapter. `--public` uses the actual shipped PeerJS library and public services; there is no adapter. Neither is a guarantee of connectivity on every network.
 
-All development lives on `main`. `.github/workflows/pages.yml` runs the rules, browser and public-connection smoke tests before publishing the site assets. The repository currently uses the existing **`gh-pages` publishing branch**: the workflow copies only tested static assets there, preserves its documentation/history, requests a Pages build, and verifies the live `version.txt` matches the tested `main` commit. Do not edit application code on `gh-pages`; it is deployment output. No force-push or administrator setting change is required.
+## Deployment
 
-The workflow also supports **Settings → Pages → Source → GitHub Actions**. When that publishing mode is selected, it automatically uses the official Pages artifact deployment instead. Neither mode runs a multiplayer backend on GitHub.
+`.github/workflows/pages.yml` runs rules tests, browser regression tests and the public-service smoke test before deployment. With the repository's existing legacy Pages source, tested static assets are copied from `main` to `gh-pages`, preserving branch history and old documentation. The workflow requests a build and verifies the live version.txt against the tested main commit. Treat `gh-pages` as publishing output, not development source.
 
-## Source map
+The workflow also supports the GitHub Actions Pages publishing mode without changing application code. Only index.html, styles.css, src/, .nojekyll, LICENSE and version.txt are published; tests and the historical Java game are not application assets.
 
-- `src/game.js`: pure rules engine, replay validation and match protocol.
-- `src/online.js`: PeerJS rooms, seat reservation, synchronization and reconnection.
-- `src/app.js`: accessible board interaction and UI state.
-- `tests/`: rules tests and browser regression tests.
-- `morris.java`, `gameBoard.java`: original console game, retained for history.
+## Files and license
 
-The repository's existing GPL-3.0 license applies. PeerJS is a separate MIT-licensed dependency loaded only for online play.
+- `src/game.js`: pure rules, topology, replay and match actions.
+- `src/app.js`: board UI and local/online interaction.
+- `src/online.js`: rooms, synchronization and reconnection.
+- `tests/`: rules, legally generated scenarios and browser regressions.
+- `morris.java`, `gameBoard.java`: original three-piece console game retained for history.
+
+The existing GPL-3.0 license applies. PeerJS is a separately MIT-licensed dependency loaded only for online play.
