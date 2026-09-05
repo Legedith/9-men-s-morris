@@ -132,6 +132,15 @@ document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => b.close
 document.querySelectorAll('dialog').forEach(d => d.addEventListener('click', e => { if (e.target === d) { const b = d.getBoundingClientRect(); if (e.clientX < b.left || e.clientX > b.right || e.clientY < b.top || e.clientY > b.bottom) d.close(); } }));
 window.addEventListener('beforeunload', e => { if (room?.role === 'host' && room.connected) { e.preventDefault(); e.returnValue = ''; } });
 window.addEventListener('pagehide', () => room?.close());
-const inviteCode = roomCode(location.hash);
-if (inviteCode) { mode = 'online'; match = newMatch(); $('join-code').value = inviteCode; feedback('Your invitation is ready. Press Join to connect to your friend.'); }
+function receiveInvite() {
+  const code = roomCode(location.hash);
+  if (!code || room) return;
+  mode = 'online'; match = newMatch(); selected = null;
+  $('join-code').value = code;
+  feedback('Your invitation is ready. Press Join to connect to your friend.');
+  render();
+}
+// Opening an invite on an already-loaded page changes only the URL fragment.
+window.addEventListener('hashchange', receiveInvite);
+receiveInvite();
 render();
