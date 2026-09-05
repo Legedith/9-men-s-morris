@@ -52,22 +52,37 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
-      contents: read
+      contents: write
       pages: write
       id-token: write
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url || steps.legacy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - name: Read existing publishing mode
+        id: mode
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: echo "build_type=$(gh api repos/$GITHUB_REPOSITORY/pages --jq .build_type)" >> "$GITHUB_OUTPUT"
       - uses: actions/configure-pages@v5
+        if: steps.mode.outputs.build_type == 'workflow'
       - name: Stage only public site assets
         run: |
           mkdir _site
           cp index.html styles.css .nojekyll LICENSE _site/
           cp -r src _site/
+          printf '%s\n' "$GITHUB_SHA" > _site/version.txt
       - uses: actions/upload-pages-artifact@v3
+        if: steps.mode.outputs.build_type == 'workflow'
         with:
           path: _site
       - uses: actions/deploy-pages@v4
         id: deployment
+        if: steps.mode.outputs.build_type == 'workflow'
+      - name: Publish tested main through the existing gh-pages source
+        id: legacy
+        if: steps.mode.outputs.build_type == 'legacy'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash scripts/publish-pages.sh

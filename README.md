@@ -66,7 +66,9 @@ The default browser suite uses **real WebRTC data channels between independent b
 
 ## Publishing from main
 
-All development lives on `main`. `.github/workflows/pages.yml` runs the rules, browser and public-connection smoke tests, then uploads only `index.html`, `styles.css`, `src/`, `.nojekyll` and `LICENSE` for Pages. Configure **Settings → Pages → Source → GitHub Actions** to use this workflow. The former `gh-pages` documentation branch is not the application source.
+All development lives on `main`. `.github/workflows/pages.yml` runs the rules, browser and public-connection smoke tests before publishing the site assets. The repository currently uses the existing **`gh-pages` publishing branch**: the workflow copies only tested static assets there, preserves its documentation/history, requests a Pages build, and verifies the live `version.txt` matches the tested `main` commit. Do not edit application code on `gh-pages`; it is deployment output. No force-push or administrator setting change is required.
+
+The workflow also supports **Settings → Pages → Source → GitHub Actions**. When that publishing mode is selected, it automatically uses the official Pages artifact deployment instead. Neither mode runs a multiplayer backend on GitHub.
 
 ## Source map
 
